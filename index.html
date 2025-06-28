@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inventario de Herramientas</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="assets/icono.png" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="tabs">
+      <button class="tab active" data-tab="ingreso">📥 Movimiento</button>
+      <button class="tab" data-tab="stock">📦 Stock</button>
+    </div>
+
+    <div id="ingreso" class="tab-content active">
+      <form id="formulario">
+        <select id="movimiento">
+          <option>Ingreso</option>
+          <option>Egreso</option>
+        </select>
+        <input type="text" id="codigo" placeholder="Código" required />
+        <button type="button" id="btn-escanear">📷 Escanear código</button>
+        <div id="qr-reader" style="margin-bottom: 1rem;"></div>
+        <input type="text" id="descripcion" placeholder="Descripción" required />
+        <input type="number" id="cantidad" placeholder="Cantidad" required />
+        <input type="text" id="persona" placeholder="¿Quién lo retira / entrega?" required />
+        <button type="submit">Registrar</button>
+      </form>
+
+      <div id="registros"></div>
+      <button id="descargarExcel">⬇️ Descargar Excel</button>
+      <button id="btn-limpiar">🧹 Borrar Movimientos</button>
+    </div>
+
+    <div id="stock" class="tab-content">
+      <form id="form-stock-inicial">
+        <input type="text" id="codigoStock" placeholder="Código nuevo" required />
+        <button type="button" id="btn-escanear-stock">📷 Escanear código</button>
+        <div id="qr-reader-stock" style="margin-bottom: 1rem;"></div>
+        <input type="text" id="descripcionStock" placeholder="Descripción" />
+        <input type="number" id="stockInicial" placeholder="Cantidad inicial" />
+        <button type="submit">📦 Registrar</button>
+      </form>
+      <table>
+        <thead>
+          <tr><th>Código</th><th>Descripción</th><th>Inicial</th><th>Mov.</th><th>Disponible</th><th>Acciones</th></tr>
+        </thead>
+        <tbody id="tablaStock"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="modal-ayuda" class="modal">
+    <div class="modal-content">
+      <span class="close">×</span>
+      <p>📘 Esta app permite registrar egresos e ingresos de herramientas, validando stock y escaneando con la cámara.</p>
+    </div>
+  </div>
+
+  <div id="instalar-popup" class="popup">
+    <div class="popup-content">
+      <p>¿Querés instalar esta app?</p>
+      <button id="btn-confirmar-instalar">Sí</button>
+      <button id="btn-rechazar">No</button>
+    </div>
+  </div>
+
+  <button id="btn-ayuda">❔</button>
+  <button id="btn-ver-stock">📋</button>
+
+  <script src="app.js"></script>
+</body>
+</html>
