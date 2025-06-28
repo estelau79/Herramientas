@@ -40,6 +40,12 @@ function renderizarStock() {
 }
 
 form.addEventListener("submit", e => {
+  document.getElementById("codigo").addEventListener("blur", () => {
+  const codigo = document.getElementById("codigo").value.trim();
+  if (stock[codigo]) {
+    document.getElementById("descripcion").value = stock[codigo].descripcion;
+  }
+});
   e.preventDefault();
   const movimiento = document.getElementById("movimiento").value;
   const codigo = document.getElementById("codigo").value.trim();
