@@ -147,6 +147,7 @@ document.getElementById("btn-escanear").addEventListener("click", () => {
     { fps: 10, qrbox: 250 },
     codigo => {
       document.getElementById("codigo").value = codigo;
+      document.getElementById("descripcion").value = stock[codigo]?.descripcion || "";
       escaner.stop().then(() => {
         qrArea.innerHTML = "";
       });
